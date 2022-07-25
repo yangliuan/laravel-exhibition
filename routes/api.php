@@ -21,5 +21,5 @@ Route::prefix('display')->group(function () {
 });
 
 Route::prefix('control')->group(function () {
-    Route::post('send-instruction', [ControlController::class,'sendInstruction']);//发送控制指令
+    Route::any('send-instruction', [ControlController::class,'sendInstruction']); //发送控制指令
 });
