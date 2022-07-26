@@ -19,3 +19,4 @@ Route::get('/', function () {
 });
 
 Route::get('/exhibition', [StaticPageController::class,'exhibition']);
+Route::get('/control', [StaticPageController::class,'control']);

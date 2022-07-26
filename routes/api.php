@@ -21,5 +21,6 @@ Route::prefix('display')->group(function () {
 });
 
 Route::prefix('control')->group(function () {
-    Route::any('send-instruction', [ControlController::class,'sendInstruction']); //发送控制指令
+    Route::post('devices', [ControlController::class,'allDevice']); //控制全部设备
+    Route::post('device/{devId}', [ControlController::class,'device']);//控制单个设备
 });
