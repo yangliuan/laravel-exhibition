@@ -1,5 +1,6 @@
 <?php
 
+use App\Broadcasting\DeviceChannel;
 use Illuminate\Support\Facades\Broadcast;
 
 /*
@@ -16,3 +17,5 @@ use Illuminate\Support\Facades\Broadcast;
 Broadcast::channel('all-device', function () {
     return true;
 });
+
+Broadcast::channel('device.{id}', DeviceChannel::class, [ 'guards' => ['device']]);
