@@ -16,6 +16,8 @@ class DeviceChannel
 
     public function join()
     {
+        return true;
+
         $device = Device::find($this->device_id);
 
         if ($device instanceof Device) {

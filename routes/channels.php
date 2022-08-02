@@ -18,4 +18,6 @@ Broadcast::channel('all-device', function () {
     return true;
 });
 
-Broadcast::channel('device.{id}', DeviceChannel::class, [ 'guards' => ['device']]);
+Broadcast::channel('private-device.{id}', function () {
+    return true;
+});
