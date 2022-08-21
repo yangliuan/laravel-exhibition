@@ -7,22 +7,33 @@
     "require": {
         "php": "^8.0.2",
         "beyondcode/laravel-websockets": "^1.13",
+        "geoip2/geoip2": "^2.13",
         "guzzlehttp/guzzle": "^7.2",
+        "iidestiny/laravel-filesystem-oss": "^3.1",
+        "intervention/image": "^2.7",
         "laravel/framework": "^9.19",
         "laravel/horizon": "^5.9",
         "laravel/passport": "^10.4",
-        "laravel/sanctum": "^2.14.1",
-        "laravel/tinker": "^2.7"
+        "laravel/sanctum": "^2.15",
+        "laravel/telescope": "^4.9",
+        "laravel/tinker": "^2.7",
+        "maatwebsite/excel": "^3.1",
+        "overtrue/easy-sms": "^2.2",
+        "phpoffice/phpword": "^0.18.3",
+        "stechstudio/laravel-zipstream": "^4.8",
+        "w7corp/easywechat": "^6.7"
     },
     "require-dev": {
+        "barryvdh/laravel-ide-helper": "^2.12",
         "fakerphp/faker": "^1.9.1",
+        "friendsofphp/php-cs-fixer": "^3.9",
         "laravel/pint": "^1.0",
         "laravel/sail": "^1.0.1",
-        "laravel/telescope": "^4.9",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^6.1",
         "phpunit/phpunit": "^9.5.10",
-        "spatie/laravel-ignition": "^1.0"
+        "spatie/laravel-ignition": "^1.0",
+        "yangliuan/generator": "^9.0"
     },
     "autoload": {
         "psr-4": {
