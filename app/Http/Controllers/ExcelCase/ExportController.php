@@ -101,7 +101,9 @@ class ExportController extends Controller
             new ExcelNotifyJob(compact('file_name', 'disk'))
         ]);
 
-        return response()->json();
+        return response()->json([
+            'code' => 200, 'msg' => 'success',
+        ]);
     }
 
     public function test(Request $request)
