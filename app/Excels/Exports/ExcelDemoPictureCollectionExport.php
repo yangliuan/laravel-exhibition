@@ -2,15 +2,15 @@
 
 namespace App\Excels\Exports;
 
-use App\Models\ExcelDemo;
+use App\Models\ExcelDemoPicture;
+use Maatwebsite\Excel\Concerns\Exportable;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromQuery;
-use Maatwebsite\Excel\Concerns\Exportable;
+use Maatwebsite\Excel\Concerns\WithEvents;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
-use Maatwebsite\Excel\Concerns\WithEvents;
-use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 use Maatwebsite\Excel\Events\AfterSheet;
+use PhpOffice\PhpSpreadsheet\Worksheet\Drawing;
 
 class ExcelDemoPictureCollectionExport implements FromCollection, WithHeadings, WithMapping, WithEvents
 {
@@ -21,14 +21,14 @@ class ExcelDemoPictureCollectionExport implements FromCollection, WithHeadings, 
     }
 
     /**
-    * 通过使用 FromQuery 接口，我们可以为导出准备查询。在这个场景下，这个查询是分块执行的,适合大数据量导出
-    *
-    * DOC:https://docs.laravel-excel.com/3.1/exports/from-query.html
-    * @return \Illuminate\Support\Collection
-    */
+     * 通过使用 FromQuery 接口，我们可以为导出准备查询。在这个场景下，这个查询是分块执行的,适合大数据量导出
+     *
+     * DOC:https://docs.laravel-excel.com/3.1/exports/from-query.html
+     * @return \Illuminate\Support\Collection
+     */
     public function collection()
     {
-        $demos = ExcelDemo::query()
+        $demos = ExcelDemoPicture::query()
             ->where('id', '>', 0)
             ->limit(10000)
             ->cursor();
@@ -37,10 +37,10 @@ class ExcelDemoPictureCollectionExport implements FromCollection, WithHeadings, 
     }
 
     /**
-    * excel表头
-    * DOC:https://docs.laravel-excel.com/3.1/exports/mapping.html#adding-a-heading-row
-    * @return array
-    */
+     * excel表头
+     * DOC:https://docs.laravel-excel.com/3.1/exports/mapping.html#adding-a-heading-row
+     * @return array
+     */
     public function headings(): array
     {
         return [
@@ -78,12 +78,12 @@ class ExcelDemoPictureCollectionExport implements FromCollection, WithHeadings, 
             AfterSheet::class => function (AfterSheet $event) {
                 //设置图片列的宽度等于图片宽度，和取消自动设置尺寸
                 $event->sheet->getColumnDimension('B')->setAutoSize(false)->setWidth(5);
-                $count = $this->collection()->count();//列数量
+                $count = $this->collection()->count(); //列数量
 
                 //基于行数迭代
-                for ($i=0;$i<$count;$i++) {
+                for ($i = 0; $i < $count; $i++) {
                     //设置行高
-                    $event->sheet->getRowDimension($i+2)->setRowHeight(33);
+                    $event->sheet->getRowDimension($i + 2)->setRowHeight(33);
                 }
 
                 //遍历数据 取图片字段并设置位置生成图片
@@ -100,11 +100,11 @@ class ExcelDemoPictureCollectionExport implements FromCollection, WithHeadings, 
                     //y轴偏移量
                     $drawing->setOffsetY(5);
                     //设置列和行
-                    $drawing->setCoordinates('B'.($key+2));
+                    $drawing->setCoordinates('B'.($key + 2));
                     //
                     $drawing->setWorksheet($event->sheet->getDelegate());
                 }
-            }
+            },
         ];
     }
 }

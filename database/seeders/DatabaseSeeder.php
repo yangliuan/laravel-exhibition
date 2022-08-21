@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             DeviceTableSeeder::class,
             DeviceAssetTableSeeder::class,
             ExcelDemoTableSeeder::class,
+            ExcelDemoPictureSeeder::class,
         ]);
     }
 }
