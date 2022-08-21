@@ -2,30 +2,31 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Seeder;
 use App\Models\Asset;
+use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
 class AssetTableSeeder extends Seeder
 {
     public function run()
     {
+        $url = config('app.url');
         $data = [
             [
                 'asset_type' => 'img',
-                'path' => 'http://api.exhibition.demo/show/seeder.jpeg',
+                'path' => $url.'/show/seeder.jpeg',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
                 'asset_type' => 'audio',
-                'path' => 'http://api.exhibition.demo/show/seeder.mp3',
+                'path' => $url.'/show/seeder.mp3',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
             [
                 'asset_type' => 'video',
-                'path' => 'http://api.exhibition.demo/show/seeder.mp4',
+                'path' => $url.'/show/seeder.mp4',
                 'created_at' => date('Y-m-d H:i:s'),
                 'updated_at' => date('Y-m-d H:i:s'),
             ],
