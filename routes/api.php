@@ -64,7 +64,7 @@ Route::prefix('excel')->group(function () {
 Route::prefix('doc')->group(function () {
     Route::group(['prefix' => 'word'], function () {
         Route::post('word-to-html', [WordController::class, 'wordConvertHtml']); //word转html
-        Route::post('html-to-word', [WordController::class, 'htmlConvertWord']); //转换成word
+        Route::any('html-to-word', [WordController::class, 'htmlConvertWord']); //转换成word
     });
 });
 

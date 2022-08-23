@@ -86,7 +86,11 @@ class WordController extends Controller
         $phpword = new PhpWord();
         $section = $phpword->addSection();
         Html::addHtml($section, $htmlContent, true, true);
+        $fileName = time().'.docx';
+        $path = 'app/public/word/'.$fileName;
+        $path = storage_path($path);
+        $phpword->save($path, 'Word2007', true);
 
-        return $phpword->save(storage_path('word/'.time().'.docx'), 'Word2007', true);
+        return response()->download($path);
     }
 }
