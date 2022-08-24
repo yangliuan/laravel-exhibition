@@ -64,6 +64,14 @@ class WordController extends Controller
         return $content;
     }
 
+    /**
+     * 只能转成纯文本，不能保留样式，会报错，未解决,demo也报错
+     * 此处改成转为纯文本样
+     * https://github.com/PHPOffice/PHPWord/blob/develop/samples/Sample_26_Html.php
+     *
+     * @param Request $request
+     * @return string
+     */
     public function htmlConvertWord(Request $request)
     {
         $request->validate([
@@ -79,17 +87,38 @@ class WordController extends Controller
         $html = $response->body();
         //dd($html);
         libxml_use_internal_errors(true);
-        $doc = new DOMDocument();
-        @$doc->loadHTML($html);
-        $htmlContent = $doc->saveHTML();
+        $htmlDom = new DOMDocument();
+        @$htmlDom->loadHTML($html);
+        //获取body节点
+        $body = $htmlDom->getElementsByTagName('body')->item(0);
+        //dd($body);
+        //获取所有的scripts
+        $scripts = $body->getElementsByTagName('script');
+        //dd($scripts->length);
+        $i = $scripts->length - 1;
+
+        while ($i > -1) {
+            $script = $scripts->item($i);
+            //移除script标签
+            $body->removeChild($script);
+            $i--;
+        }
+
+        $htmlContent = $htmlDom->saveHTML($body);
+        dd($htmlContent);
+        //$htmlContent = \str_replace(["\t","\n"],"",$htmlContent);
+        //$htmlContent = strip_tags($htmlContent,'<h1><h2><h3><h4><h5><h6><div><p><ul><li><span>');
+        dump($htmlContent);
+        $htmlContent = \strip_tags($htmlContent);
         dd($htmlContent);
         $phpword = new PhpWord();
         $section = $phpword->addSection();
-        Html::addHtml($section, $htmlContent, true, true);
+        // Html::addHtml($section, $htmlContent, false, false);
+        $section->addText($htmlContent);
         $fileName = time().'.docx';
         $path = 'app/public/word/'.$fileName;
         $path = storage_path($path);
-        $phpword->save($path, 'Word2007', true);
+        $phpword->save($path, 'Word2007', false);
 
         return response()->download($path);
     }
