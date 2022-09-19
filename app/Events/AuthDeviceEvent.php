@@ -39,7 +39,7 @@ class AuthDeviceEvent
     {
         return [
             'action_type' => $this->control_instruction['action_type'],
-            'action' => $this->control_instruction['action']
+            'action' => $this->control_instruction['action'],
         ];
     }
 }

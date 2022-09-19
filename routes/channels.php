@@ -18,6 +18,6 @@ Broadcast::channel('all-device', function () {
     return true;
 });
 
-Broadcast::channel('private-device.{id}', function () {
+Broadcast::channel('device.{id}', function ($user, $id) {
     return true;
 });
