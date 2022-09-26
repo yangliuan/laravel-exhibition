@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Traits\DateFormat;
-use Laravel\Passport\HasApiTokens;
+use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class Device extends Authenticatable

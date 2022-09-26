@@ -42,7 +42,7 @@ return [
         ],
 
         'device' => [
-            'driver' => 'passport',
+            'driver' => 'sanctum',
             'provider' => 'devices',
         ],
     ],
