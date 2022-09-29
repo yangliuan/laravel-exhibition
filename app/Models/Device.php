@@ -3,8 +3,8 @@
 namespace App\Models;
 
 use App\Traits\DateFormat;
-use Laravel\Sanctum\HasApiTokens;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Laravel\Sanctum\HasApiTokens;
 
 class Device extends Authenticatable
 {
@@ -29,5 +29,10 @@ class Device extends Authenticatable
         return $this->belongsToMany(Asset::class, 'device_asset', 'dev_id', 'asset_id')
             ->withTimestamps()
             ->using(DeviceAsset::class);
+    }
+
+    public function getToken()
+    {
+        return $this->createToken('device', ['display'])->plainTextToken;
     }
 }

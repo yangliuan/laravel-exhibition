@@ -3,8 +3,8 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Device;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 
 class DisplayController extends Controller
@@ -24,7 +24,7 @@ class DisplayController extends Controller
         $device = Device::where('mac_address', $request->input('mac'))->first();
 
         if ($device instanceof Device) {
-            $token = $device->createToken('device', ['display'])->accessToken;
+            $token = $device->getToken();
 
             return response()->json([
                 'code' => 200, 'msg' => 'success', 'token' => $token,
