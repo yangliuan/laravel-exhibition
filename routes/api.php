@@ -1,9 +1,7 @@
 <?php
 
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\DisplayController;
 use App\Http\Controllers\Api\ControlController;
+use App\Http\Controllers\Api\DisplayController;
 use App\Http\Controllers\Doc\WordController;
 use App\Http\Controllers\ExcelCase\ExportController;
 use App\Http\Controllers\ExcelCase\ImportController;
@@ -15,6 +13,8 @@ use App\Http\Controllers\FilesCase\UrlHandleController;
 use App\Http\Controllers\ImageCase\InterventionController;
 use App\Http\Controllers\Lbs\GeoIpController;
 use App\Http\Controllers\Wechat\MiniProgramController;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,13 +27,13 @@ use App\Http\Controllers\Wechat\MiniProgramController;
 |
 */
 Route::prefix('display')->group(function () {
-    Route::post('login', [DisplayController::class,'login']);//显示端设备登录
-    Route::get('asset', [DisplayController::class,'asset'])->middleware(['auth:device','scope:display']);//获取资源
+    Route::post('login', [DisplayController::class, 'login']); //显示端设备登录
+    Route::get('asset', [DisplayController::class, 'asset'])->middleware(['auth:device']); //获取资源
 });
 
 Route::prefix('control')->group(function () {
-    Route::post('devices', [ControlController::class,'allDevice']); //控制全部设备
-    Route::post('device/{devId}', [ControlController::class,'device']);//控制单个设备
+    Route::post('devices', [ControlController::class, 'allDevice']); //控制全部设备
+    Route::post('device/{devId}', [ControlController::class, 'device']); //控制单个设备
 });
 
 Route::prefix('files')->group(function () {

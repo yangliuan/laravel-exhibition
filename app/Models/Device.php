@@ -33,6 +33,6 @@ class Device extends Authenticatable
 
     public function getToken()
     {
-        return $this->createToken('device', ['display'])->plainTextToken;
+        return $this->createToken('device')->plainTextToken;
     }
 }
