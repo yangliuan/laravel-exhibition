@@ -33,7 +33,7 @@ Route::prefix('display')->group(function () {
 
 Route::prefix('control')->group(function () {
     Route::post('devices', [ControlController::class, 'allDevice']); //控制全部设备
-    Route::put('device/{devId}', [ControlController::class, 'device']); //控制单个设备
+    Route::put('device/{devId}', [ControlController::class, 'device'])->middleware(['auth:device']); //控制单个设备
 });
 
 Route::prefix('files')->group(function () {
